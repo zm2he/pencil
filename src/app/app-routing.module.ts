@@ -13,7 +13,8 @@ import { EditComponent } from './components/edit/edit.component';
 const routes: Routes = [
   { path: '', redirectTo: '/edit', pathMatch: 'full'},
   { path: 'login', component: LoginComponent},
-  { path: 'edit', component: EditComponent, canActivate: [ AuthGuardService] }
+  { path: 'edit', component: EditComponent, canActivate: [ AuthGuardService] },
+  { path: "**", component: LoginComponent }
 ];
 
 @NgModule({
