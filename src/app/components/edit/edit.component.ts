@@ -53,7 +53,6 @@ export class EditComponent implements OnInit {
   // auto-save
   startTime: number;
   dirty: boolean = false;
-  loadedDoc: string = '';
   autoSave;
 
   // msg
@@ -72,11 +71,6 @@ export class EditComponent implements OnInit {
     this.quickResetMsg = debounce(this.onIdle, 500);
     this.slowResetMsg = debounce(this.onIdle, 2000);
     this.user = this.firebaseService.getUser();
-    this.firebaseService.getUserDocument()
-    .then(doc=> {
-      console.log(`loaded ${doc.length} characters doc`);
-      this.loadedDoc = doc;
-    });
   }
 
   ngOnInit(): void {
@@ -122,7 +116,11 @@ export class EditComponent implements OnInit {
       autoLink: true
     });
 
-    this.editor.setContent(this.loadedDoc);
+    this.firebaseService.getUserDocument()
+    .then(doc=> {
+      console.log(`loaded ${doc.length} characters doc`);
+      this.editor.setContent(doc);
+    });
 
     this.editor.subscribe('editableInput',(event, editable) => {
       let msg = event.inputType;
