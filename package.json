@@ -1,5 +1,5 @@
 {
-  "name": "angular1",
+  "name": "pencil",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -19,6 +19,10 @@
     "@angular/platform-browser": "~9.1.9",
     "@angular/platform-browser-dynamic": "~9.1.9",
     "@angular/router": "~9.1.9",
+    "firebase": "^7.15.0",
+    "format-duration": "^1.3.1",
+    "lodash.debounce": "^4.0.8",
+    "medium-editor": "^5.23.3",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

@@ -1,4 +1,4 @@
-# Angular1
+# Pencil
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
 
@@ -25,3 +25,16 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+## How to integrate Firebase
+Handling user authentication with Firebase in your React apps(https://blog.logrocket.com/user-authentication-firebase-react-apps/)
+
+How to deploy a react app with Firebase hosting (https://medium.com/swlh/how-to-deploy-a-react-app-with-firebase-hosting-98063c5bf425)
+
+## How to integrate Medium Editor
+MediumEditor (https://github.com/yabwe/medium-editor)
+
+How to integrate a Medium Editor in Angula-8 (https://hub.packtpub.com/how-to-integrate-a-medium-editor-in-angular-8/)
+
+Angular inline editing with the Medium Editor (https://medium.com/@ole.ersoy/angular-inline-editing-with-the-medium-editor-6a8ca3ad1f70)

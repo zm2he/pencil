@@ -1,0 +1,74 @@
+/* Add application styles & imports to this file! */
+@import url('https://cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css');
+@import url('https://cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/themes/default.css');
+
+/* Remove blue outline in Chrome */
+div:focus {
+  outline:0;
+}
+
+.app-container {
+  margin: 0 auto;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 16px);
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.app-footer {
+  display: flex;
+  align-items: center;
+  height: 32px;
+}
+  
+.app-logo {
+  line-height: 1; 
+  overflow: initial; 
+  color: lightskyblue;
+  font-size: 0.75em;
+  font-family: "Fira Mono", "Andale Mono", "Consolas", monospace
+}
+  
+.user-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 16x 0;
+}
+
+.user-avatar {
+  background-size: cover;
+  height: 32px;
+  width: 32px;
+}
+
+.user-name {
+  margin:0;
+}
+
+.user-logout-button {
+  margin: 4px 0;
+  cursor: pointer;
+  border: none;
+  color: blue;
+  background: white
+}
+
+.editor-container {
+  flex: auto;
+  width: 100%;
+  height: calc(100vh - 16px);
+  overflow-y: scroll;
+  border: 1px solid #888; 
+}
+  
+.editor {
+  min-height: 60%;
+  outline: none
+}

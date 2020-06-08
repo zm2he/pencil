@@ -1,0 +1,30 @@
+<div class = "app-container">
+    <div class="app-header">
+        <div>       
+            <pre class='app-logo'>{{logo}}</pre>
+        </div>
+        <div style="flex: auto;"></div>
+        <div class='user-container'>
+          <img class="user-avatar" *ngIf="user.photoURL"
+            src= {{user.photoURL}}
+            alt = 'avatar'
+          />
+          <img class="user-avatar" *ngIf="!user.photoURL"
+            src= 'assets/images/avatar.png'
+            alt = 'avatar'
+          />
+          <span *ngIf="user.displayName" class ="user-name">{{user.displayName}}</span>
+          <button class = "user-login-button"  (click) = "onLogout()">Log out</button>
+        </div>
+    </div>
+
+    <div class='editor-container'>
+        <div #medium  style="min-height:100%">
+        </div>
+    </div>
+    <div class="app-footer">
+        <span>{{message}}</span>
+        <span style="flex:auto;"></span>
+        <span>{{getEditorInfo()}}</span>
+    </div>
+</div>  

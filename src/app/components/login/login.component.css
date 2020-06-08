@@ -1,0 +1,30 @@
+.app-container {
+    margin: 0 auto;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.app-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.app-logo {
+    line-height: 1; 
+    overflow: initial; 
+    color: lightskyblue;
+    font-size: 0.75em;
+    font-family: "Fira Mono", "Andale Mono", "Consolas", monospace
+}
+
+.user-login-button {
+    margin: 32px 0;
+    cursor: pointer;
+    border: 1px solid #333;
+    color: blue;
+    background: white;
+}
