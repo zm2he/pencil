@@ -50,6 +50,7 @@ export function setEndOfContenteditable(contentEditableElement)
         selection.removeAllRanges();//remove any selections already made
         selection.addRange(range);//make the range you have just created the visible selection
     }
+    /*
     else if(document.selection)//IE 8 and lower
     { 
         range = document.body.createTextRange();//Create a range (a range is a like the selection but invisible)
@@ -57,4 +58,5 @@ export function setEndOfContenteditable(contentEditableElement)
         range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
         range.select();//Select the range (make it the visible selection
     }
+    */
 }
