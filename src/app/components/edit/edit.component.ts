@@ -152,7 +152,7 @@ export class EditComponent implements OnInit {
         const child = children[i];
         const result = convertLaTeXLine(child.outerHTML);
         if(result.processed) {
-          this.editor.setContent(result.text, i);
+          child.outerHTML = result.text;
           const node = this.editor.elements[0].childNodes[i];
           setEndOfContenteditable(node);
           break;

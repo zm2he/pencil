@@ -42,7 +42,8 @@ function processText(text) {
     }
   }
   return { 
-    text
+    text,
+    processed: false
   }
 }
 
@@ -50,7 +51,10 @@ export function convertLaTeXLine(line) {
   // quickly test whether the line contains a character $
   let index = line.indexOf('$');
   if(index === -1) {
-    return line;
+    return {
+      text: line,
+      processed: false
+    }
   }
 
   let processed = false;
@@ -96,7 +100,10 @@ export function convertLaTeXLine(line) {
 export function  convertLaTeXLines(html) {
   const rawLines = html.match(/<p>(.*?)<\/p>/g);
   if(!rawLines) {
-    return html;
+    return {
+      text:html,
+      processed: false
+    }
   }
 
   let processed = false;
