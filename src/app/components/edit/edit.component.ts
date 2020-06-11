@@ -11,35 +11,36 @@ import MediumEditor from 'medium-editor'
 
 import projectLogo from '../../services/logo'
 import { FirebaseService } from '../../services/firebase.service';
-import { convertLaTeXLine } from './latex.helper';
+import { convertLaTeXLine } from './latex';
+import { setEndOfContenteditable } from './caret';
 
 const BUTTONS = [
   'bold'
   ,'italic'
   ,'underline'  
-  ,'strikethrough',
-  ,'subscript'
-  ,'superscript'
+  //,'strikethrough',
+  //,'subscript'
+  //,'superscript'
   ,'anchor'
   ,'image'
   ,'quote'
-  ,'pre'
+  //,'pre'
   ,'orderedlist'
   ,'unorderedlist'
   ,'indent'
   ,'outdent' 
-  ,'justifyLeft'
-  ,'justifyCenter'
-  ,'justifyRight'
-  ,'justifyFull'
+  //,'justifyLeft'
+  //,'justifyCenter'
+  //,'justifyRight'
+  //,'justifyFull'
   ,'h1'
   ,'h2'
   ,'h3'
-  ,'h4'
-  ,'h5'
-  ,'h6'  
-  ,'removeFormat'
-  ,'html'
+  //,'h4'
+  //,'h5'
+  //,'h6'  
+  //,'removeFormat'
+  //,'html'
 ];
 
 @Component({
@@ -66,7 +67,6 @@ export class EditComponent implements OnInit {
   @ViewChild('medium', {
     static: true
   }) medium: ElementRef;
-
 
   constructor(private firebaseService: FirebaseService) { 
     this.autoSave = debounce(this.onSave, 15000);
@@ -124,35 +124,7 @@ export class EditComponent implements OnInit {
       this.editor.setContent(doc);
     });
 
-    this.editor.subscribe('editableInput',(event, editable) => {
-      let msg = event.inputType;
-      if(event.data) {
-        msg += `: "${event.data}"`;
-      }
-
-      // replace equation between $..$ with latex-js
-      if(event.data === '$' // is a latex delimeter?
-        || (event.data === null)) // copy/paste?
-      {
-        let processed = false;
-        const results = [];
-        const children = event.currentTarget.children;
-        for(let i = 0; i < children.length; i++) {
-          const result = convertLaTeXLine(children[i].outerHTML);
-          results.push(result.text);
-          if(!processed) {
-            processed = result.processed;
-          }
-        }
-        if(processed) {
-            this.editor.setContent(results.join(''));  
-        }
-      }
-
-      this.onShowMsg(msg, true)
-      this.dirty = true;
-      this.autoSave();
-    });
+    this.editor.subscribe('editableInput', this.onEditEvent.bind(this));
   }
 
   getEditorInfo() {
@@ -160,9 +132,37 @@ export class EditComponent implements OnInit {
     return `elapsed: ${format(currentTime - this.startTime)}, powered by "Medium Editor" `
   }
 
-  
+
   onIdle() {
     this.message = 'idle';
+  }
+
+  onEditEvent(event, editable) {
+    let msg = event.inputType;
+    if(event.data) {
+      msg += `: "${event.data}"`;
+    }
+
+    // replace equation between $..$ with latex-js
+    if(event.data === '$' // is a latex delimeter?
+      || (event.data === null)) // copy/paste?
+    {
+      const children = event.currentTarget.children;
+      for(let i = 0; i < children.length; i++) {
+        const child = children[i];
+        const result = convertLaTeXLine(child.outerHTML);
+        if(result.processed) {
+          this.editor.setContent(result.text, i);
+          const node = this.editor.elements[0].childNodes[i];
+          setEndOfContenteditable(node);
+          break;
+        }
+      }
+    }
+
+    this.onShowMsg(msg, true)
+    this.dirty = true;
+    this.autoSave();
   }
 
   onShowMsg(msg, quick) {

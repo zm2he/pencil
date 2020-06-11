@@ -7,7 +7,7 @@
 /*
   LaTeX equation examples:
     $f(x) = \int_{-\infty}^\infty \hat f(\xi)\,e^{2 \pi i \xi x} \, d\xi$
-    $$f(n) = \begin{cases} \frac{n}{2}, & \text{if } n\text{ is even} \\ 3n+1, & \text{if } n\text{ is odd} \end{cases}$$
+    $f(n) = \begin{cases} \frac{n}{2}, & \text{if } n\text{ is even} \\ 3n+1, & \text{if } n\text{ is odd} \end{cases}$
     $f(x) = x^2$
     $g(x) = \frac{1}{x}$
     $F(x) = \int^a_b \frac{1}{3}x^3$
@@ -25,7 +25,8 @@ function processText(text) {
       
       return {
         text: prefix 
-        + '<latex-js baseURL="https://cdn.jsdelivr.net/npm/latex.js/dist/" hyphenate="false">' 
+        //+ '<latex-js baseURL="https://cdn.jsdelivr.net/npm/latex.js/dist/" hyphenate="false">' 
+        + '<latex-js>' 
         + '\\documentclass{article}'
         + '\\begin{document}'
         + '$'
@@ -69,12 +70,10 @@ export function convertLaTeXLine(line) {
         processed = result.processed;
       }
       segments.push(result.text);
-      console.log(text)
     }
     // don't touch a latex block
     text = line.substring(startIndex, endIndex);
     segments.push(text);
-    console.log(text);
     currentIndex = endIndex ;
   }
 
@@ -85,7 +84,6 @@ export function convertLaTeXLine(line) {
       processed = result.processed;
     }
     segments.push(result.text);
-    console.log(text)
   }
   return {
     text: segments.join(''),
