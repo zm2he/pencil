@@ -25,6 +25,7 @@ function processText(text) {
       
       return {
         text: prefix 
+        + "&nbsp;&nbsp;"
         //+ '<latex-js baseURL="https://cdn.jsdelivr.net/npm/latex.js/dist/" hyphenate="false">' 
         + '<latex-js>' 
         + '\\documentclass{article}'
@@ -34,6 +35,7 @@ function processText(text) {
         + '$'
         + '\\end{document}'
         + '</latex-js>'
+        + "&nbsp;&nbsp;"
         + suffix,
        processed: true
       }
