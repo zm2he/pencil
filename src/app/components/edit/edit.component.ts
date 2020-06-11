@@ -11,6 +11,7 @@ import MediumEditor from 'medium-editor'
 
 import projectLogo from '../../services/logo'
 import { FirebaseService } from '../../services/firebase.service';
+import { convertLaTeXLine } from './latex.helper';
 
 const BUTTONS = [
   'bold'
@@ -65,7 +66,8 @@ export class EditComponent implements OnInit {
   @ViewChild('medium', {
     static: true
   }) medium: ElementRef;
-  
+
+
   constructor(private firebaseService: FirebaseService) { 
     this.autoSave = debounce(this.onSave, 15000);
     this.quickResetMsg = debounce(this.onIdle, 500);
@@ -127,6 +129,26 @@ export class EditComponent implements OnInit {
       if(event.data) {
         msg += `: "${event.data}"`;
       }
+
+      // replace equation between $..$ with latex-js
+      if(event.data === '$' // is a latex delimeter?
+        || (event.data === null)) // copy/paste?
+      {
+        let processed = false;
+        const results = [];
+        const children = event.currentTarget.children;
+        for(let i = 0; i < children.length; i++) {
+          const result = convertLaTeXLine(children[i].outerHTML);
+          results.push(result.text);
+          if(!processed) {
+            processed = result.processed;
+          }
+        }
+        if(processed) {
+            this.editor.setContent(results.join(''));  
+        }
+      }
+
       this.onShowMsg(msg, true)
       this.dirty = true;
       this.autoSave();
@@ -138,6 +160,7 @@ export class EditComponent implements OnInit {
     return `elapsed: ${format(currentTime - this.startTime)}, powered by "Medium Editor" `
   }
 
+  
   onIdle() {
     this.message = 'idle';
   }
