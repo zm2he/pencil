@@ -1,7 +1,7 @@
 # Pencil
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7. [A demo web page](https://pencil-b06ba.web.app) is hosted at Firebase hostsing.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7. [A demo web page](https://pencil-b06ba.web.app) is hosted at Firebase hosting.
 
-Users need to login via their google account.  Once logged in, the users can edit on the page integrated with the [Medium editor](https://github.com/yabwe/medium-editor). The editted content is automatically saved into the Firebase database in near real-time for that users' account without hitting a submit button. To reduce network traffics, the auto-saving is debounced for 10 seconds, meaning auto-saving kicks in if idling more than 10 seconds. When the user logs back in, their last auto-saved documents are retrived and ready for editting.
+Users need to log in via their google account.  Once logged in, the users can edit on the page integrated with the [Medium editor](https://github.com/yabwe/medium-editor). The edited content is automatically saved into the Firebase database in near real-time for the user's account without hitting a submit button. To reduce network traffic, the auto-saving is debounced for 10 seconds, meaning auto-saving kicks in if it is idle for more than 10 seconds. When the user logs back in, their last auto-saved documents are retrived and ready for editting.
 
 Users can directly enter LaTeX equestions into the editor inside 2 enclosing $ symbols and once the user is done typing them out, the LaTeX equation is renderred. 
 An example,  \$f(x) = \int_{-\infty}^\infty \hat f(\xi)\,e^{2 \pi i \xi x} \, d\xi\$ is rendered to $f(x) = \int_{-\infty}^\infty \hat f(\xi)\,e^{2 \pi i \xi x} \, d\xi$
